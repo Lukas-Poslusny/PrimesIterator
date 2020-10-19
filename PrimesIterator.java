@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PrimesIterator implements Iterator<Integer> {
 
+    static ArrayList<Integer> primesList = new ArrayList<Integer>();
     private int i = 1;
 
     @Override
@@ -11,12 +13,11 @@ public class PrimesIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        int j = i + 1;
-        for (; !isPrime(j); j++) ;
-        i = j;
+        do {
+            i++;
+        } while (!isPrime(i));
         return i;
     }
-
 
     public static void main(String[] args) {
         for (int prime : new PrimesIterable()) {
@@ -25,11 +26,14 @@ public class PrimesIterator implements Iterator<Integer> {
     }
 
     private static boolean isPrime(int i) {
-        for (int j = 2; j < i; j++) {
-            if (i % j == 0) {
+        int sqroot = (int) Math.sqrt(i);
+        for (int prime: primesList) {
+            if (prime > sqroot) break;
+            if (i % prime == 0) {
                 return false;
             }
         }
+        primesList.add(i);
         return true;
     }
 }
