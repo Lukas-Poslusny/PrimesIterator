@@ -21,6 +21,7 @@ public class PrimesIterator implements Iterator<Integer> {
 
     public static void main(String[] args) {
         for (int prime : new PrimesIterable()) {
+            if (prime < 100)
             System.out.println(prime);
         }
     }
